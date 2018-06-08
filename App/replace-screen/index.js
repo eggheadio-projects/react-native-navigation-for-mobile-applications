@@ -19,7 +19,7 @@ const Bar = ({ navigation }) => (
     />
     <Button
       title="Replace with baz"
-      onPress={() => null}
+      onPress={() => navigation.dispatch(replaceCurrentScreen('Baz'))}
     />
   </View>
 );
@@ -53,5 +53,25 @@ const MainAppStack = StackNavigator({
     },
   },
 });
+
+const replaceCurrentScreen = (routeName, params = {}) => ({
+  type: 'ReplaceCurrentScreen',
+  routeName,
+  params,
+});
+
+const prevGetStateForActionHomeStack = MainAppStack.router.getStateForAction;
+MainAppStack.router.getStateForAction = (action, state) => {
+  if (state && action.type === 'ReplaceCurrentScreen') {
+    const routes = state.routes.slice(0, state.routes.length - 1);
+    routes.push(action);
+    return {
+      ...state,
+      routes,
+      index: routes.length - 1,
+    };
+  }
+  return prevGetStateForActionHomeStack(action, state);
+};
 
 export default MainAppStack;
