@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, SafeAreaView, Text } from 'react-native';
+import { Button, View, SafeAreaView, Text } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -22,6 +22,16 @@ const MainApp = TabNavigator({
       title: 'Favorites',
       tabBarIcon: ({ tintColor }) => <MaterialCommunityIcons color={tintColor} name="star" size={26} />
     },
+  },
+  New: {
+    screen: View,
+    navigationOptions: ({ navigation }) => ({
+      title: 'New',
+      tabBarIcon: ({ tintColor }) => <MaterialCommunityIcons color={tintColor} name="plus" size={26} />,
+      tabBarOnPress: () => {
+        navigation.navigate('Modal');
+      },
+    }),
   },
   Recents: {
     screen: Recents,
