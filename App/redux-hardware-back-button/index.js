@@ -1,5 +1,6 @@
 import React from 'react';
-import { addNavigationHelpers } from 'react-navigation';
+import { BackHandler } from 'react-native';
+import { addNavigationHelpers, NavigationActions } from 'react-navigation';
 import { Provider, connect } from 'react-redux';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import {
@@ -29,11 +30,34 @@ const reactNavigationMiddleware = createReactNavigationReduxMiddleware(
 );
 const addListener = createReduxBoundAddListener("root");
 
-const App = ({ dispatch, nav }) => (
-  <RootNavigator
-    navigation={addNavigationHelpers({ dispatch, state: nav, addListener })}
-  />
-);
+class App extends React.Component {
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.onHardwareBack);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onHardwareBack);
+  }
+
+  onHardwareBack = () => {
+    const { dispatch, nav } = this.props;
+    if (nav.index === 0) {
+      return false;
+    }
+    dispatch(NavigationActions.back());
+    return true;
+  }
+
+  render() {
+    const { dispatch, nav } = this.props;
+    return (
+      <RootNavigator
+        navigation={addNavigationHelpers({ dispatch, state: nav, addListener })}
+      />
+    );
+  }
+}
+
 
 const mapStateToProps = (state) => ({
   nav: state.nav
