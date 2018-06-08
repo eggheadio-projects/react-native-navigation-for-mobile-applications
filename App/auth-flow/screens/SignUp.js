@@ -16,7 +16,7 @@ export default ({ navigation, screenProps }) => (
         buttonStyle={{ marginTop: 20 }}
         backgroundColor="#03A9F4"
         title="SIGN UP"
-        onPress={() => null}
+        onPress={() => screenProps.signIn()}
       />
       <Button
         buttonStyle={{ marginTop: 20 }}
