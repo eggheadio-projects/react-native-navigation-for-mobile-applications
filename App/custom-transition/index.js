@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, SafeAreaView, Text } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { Button, View, SafeAreaView, Animated, StyleSheet, Easing, Text } from 'react-native';
+import { StackNavigator, StackRouter, createNavigationContainer, createNavigator, Transitioner, addNavigationHelpers } from 'react-navigation';
 
 const Home = ({ navigation }) => (
   <SafeAreaView>
@@ -34,6 +34,21 @@ const MainAppStack = StackNavigator({
     navigationOptions: {
       title: 'Details',
     },
+  },
+}, {
+  // headerMode: 'none',
+  // https://github.com/react-navigation/react-navigation/blob/276249c4c792cc2592d5e829a9c87e81be9dd823/src/TypeDefinition.js
+  transitionConfig: () => {
+    return {
+      transitionSpec: {
+        duration: 300,
+        easing: Easing.out(Easing.poly(4)),
+        timing: Animated.timing,
+      },
+      containerStyle: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      },
+    };
   },
 });
 
