@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, SafeAreaView} from 'react-native';
+import { Button, View, SafeAreaView} from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 const Home = ({ navigation }) => (
@@ -10,7 +10,7 @@ const Home = ({ navigation }) => (
     />
     <Button
       title="Go to modal"
-      onPress={() => null}
+      onPress={() => navigation.navigate('Modal')}
     />
   </SafeAreaView>
 );
@@ -19,7 +19,7 @@ const Details = ({ navigation }) => (
   <SafeAreaView>
     <Button
       title="Go to modal"
-      onPress={() => null}
+      onPress={() => navigation.navigate('Modal')}
     />
   </SafeAreaView>
 );
@@ -39,4 +39,26 @@ const MainAppStack = StackNavigator({
   },
 });
 
-export default MainAppStack;
+// NEW CODE BELOW HERE...
+const ModalScreen = ({ navigation }) => (
+  <SafeAreaView>
+    <Button
+      title="Close modal"
+      onPress={() => navigation.goBack(null)}
+    />
+  </SafeAreaView>
+);
+
+const RootNavigator = StackNavigator({
+  MainApp: {
+    screen: MainAppStack,
+  },
+  Modal: {
+    screen: ModalScreen,
+  },
+}, {
+  mode: 'modal',
+  headerMode: 'none',
+});
+
+export default RootNavigator;
