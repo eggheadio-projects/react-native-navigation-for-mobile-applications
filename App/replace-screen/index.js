@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, View, SafeAreaView} from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
 const Foo = ({ navigation }) => (
   <View>
@@ -33,7 +33,7 @@ const Baz = ({ navigation }) => (
   </View>
 );
 
-const MainAppStack = StackNavigator({
+const MainAppStack = createStackNavigator({
   Food: {
     screen: Foo,
     navigationOptions: {
