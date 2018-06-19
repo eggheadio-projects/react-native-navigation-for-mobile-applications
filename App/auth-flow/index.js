@@ -1,6 +1,6 @@
-import React from 'react';
+  import React from 'react';
 import { AsyncStorage, View, Text } from 'react-native';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { FontAwesome } from '@expo/vector-icons';
 
 import SignUp from './screens/SignUp';
@@ -19,7 +19,7 @@ const checkAuth = () => {
   });
 }
 
-const AuthStack = StackNavigator({
+const AuthStack = createStackNavigator({
   SignUp: {
     screen: SignUp,
     navigationOptions: {
@@ -34,7 +34,7 @@ const AuthStack = StackNavigator({
   }
 });
 
-const PrimaryApp = TabNavigator(
+const PrimaryApp = createBottomTabNavigator(
   {
     Home: {
       screen: Home,
