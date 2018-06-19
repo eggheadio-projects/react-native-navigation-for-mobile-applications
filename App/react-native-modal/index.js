@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, View, SafeAreaView, Modal, Text, StyleSheet } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
 const Home = ({ navigation, screenProps }) => (
   <SafeAreaView>
@@ -26,7 +26,7 @@ const Details = ({ navigation, screenProps }) => (
   </SafeAreaView>
 );
 
-const MainAppStack = StackNavigator({
+const MainAppStack = createStackNavigator({
   Home: {
     screen: Home,
     navigationOptions: {
