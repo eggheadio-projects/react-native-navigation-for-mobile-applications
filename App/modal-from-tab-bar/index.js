@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, View, SafeAreaView, Text } from 'react-native';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Favorites = ({ navigation }) => (
@@ -15,7 +15,7 @@ const Recents = ({ navigation }) => (
   </SafeAreaView>
 );
 
-const MainApp = TabNavigator({
+const MainApp = createBottomTabNavigator({
   Favorites: {
     screen: Favorites,
     navigationOptions: {
@@ -51,7 +51,7 @@ const ModalScreen = ({ navigation }) => (
   </SafeAreaView>
 );
 
-const RootNavigator = StackNavigator({
+const RootNavigator = createStackNavigator({
   MainApp: {
     screen: MainApp,
   },
